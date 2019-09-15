@@ -127,3 +127,9 @@ resource "aws_ram_principal_association" "example" {
   principal          = "578044811547"
   resource_share_arn = "${aws_ram_resource_share.example.arn}"
 }
+
+resource "aws_ram_resource_share_accepter" "example" {
+  procider = "aws.tf1"
+  share_arn = "${aws_ram_principal_association.example.resource_share_arn}"
+}
+
