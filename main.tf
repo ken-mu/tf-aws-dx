@@ -113,7 +113,17 @@ resource "aws_ec2_transit_gateway_route_table_propagation" "main" {
   transit_gateway_route_table_id = "${aws_ec2_transit_gateway_route_table.main.id}"
 }
 
-resource "aws_ram_resource_share" "tgw" {
+resource "aws_ram_resource_share" "example" {
   name = "example"
   allow_external_principals = false
+}
+
+resource "aws_ram_resource_association" "example" {
+  resource_arn       = "${aws_ec2_transit_gateway.example.arn}"
+  resource_share_arn = "${aws_ram_resource_share.tgw.arn}"
+}
+
+resource "aws_ram_principal_association" "example" {
+  principal          = "578044811547"
+  resource_share_arn = "${aws_ram_resource_share.example.arn}"
 }
