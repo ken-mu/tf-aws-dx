@@ -115,7 +115,7 @@ resource "aws_ec2_transit_gateway_route_table_propagation" "main" {
 
 resource "aws_ram_resource_share" "example" {
   name = "example"
-  allow_external_principals = false
+  allow_external_principals = true
 }
 
 resource "aws_ram_resource_association" "example" {
