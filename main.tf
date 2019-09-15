@@ -83,6 +83,22 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "main" {
   }
 }
 
+resource "aws_ec2_transit_gateway_vpc_attachment" "tf1" {
+  transit_gateway_id = "${aws_ec2_transit_gateway.example.id}"
+  vpc_id             = "${aws_vpc.tf1.id}"
+
+  transit_gateway_default_route_table_association = "false"
+  transit_gateway_default_route_table_propagation = "false"
+
+  subnet_ids = [
+    "${aws_subnet.tf1.id}",
+  ]
+  
+  tags = {
+    Name = "tf1"
+  }
+}
+
 resource "aws_ec2_transit_gateway_route_table" "main" {
   transit_gateway_id = "${aws_ec2_transit_gateway.example.id}"
 }
