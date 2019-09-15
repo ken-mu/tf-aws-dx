@@ -22,6 +22,15 @@ resource "aws_vpc" "main" {
   }
 }
 
+resource "aws_vpc" "tf1" {
+  provider    = "aws.tf1"
+  cidr_block  = "10.10.0.0/16"
+
+  tags = {
+    Name = "tgw"
+  }
+}
+
 resource "aws_subnet" "private-1" {
   vpc_id     = "${aws_vpc.main.id}"
   cidr_block = "10.1.0.0/24"
