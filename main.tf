@@ -10,3 +10,7 @@ provider "aws" {
 data "aws_ec2_transit_gateway" "example" {
   id = "example"
 }
+
+resource "aws_ec2_transit_gateway_route_table" "ctrl" {
+  transit_gateway_id = "${aws_ec2_transit_gateway.example.id}"
+}
