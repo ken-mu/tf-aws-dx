@@ -7,10 +7,6 @@ provider "aws" {
   secret_key = var.aws_access_secret
 }
 
-data "aws_ec2_transit_gateway" "example" {
-  id = "example"
-}
-
-resource "aws_ec2_transit_gateway_route_table" "ctrl" {
-  transit_gateway_id = "${aws_ec2_transit_gateway.example.id}"
+resource "aws_ec2_transit_gateway" "example" {
+  description = "example"
 }
