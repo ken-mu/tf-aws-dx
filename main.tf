@@ -53,3 +53,12 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "main" {
     Name = "main"
   }
 }
+
+resource "aws_ec2_transit_gateway_route_table" "main" {
+  transit_gateway_id = "${aws_ec2_transit_gateway.example.id}"
+}
+
+resource "aws_ec2_transit_gateway_route_table_association" "main" {
+  transit_gateway_attachment_id  = "${aws_ec2_transit_gateway_vpc_attachment.main.id}"
+  transit_gateway_route_table_id = "${aws_ec2_transit_gateway_route_table.main.id}"
+}
