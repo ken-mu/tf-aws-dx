@@ -43,7 +43,7 @@ resource "aws_subnet" "private-1" {
   }
 }
 
-resource "aws_subnet" "tg1" {
+resource "aws_subnet" "tf1" {
   provider = "aws.tf1"
   vpc_id     = "${aws_vpc.tf1.id}"
   cidr_block = "10.10.0.0/24"
