@@ -43,6 +43,17 @@ resource "aws_subnet" "private-1" {
   }
 }
 
+resource "aws_subnet" "tg1" {
+  provider = "aws.tf1"
+  vpc_id     = "${aws_vpc.tf1.id}"
+  cidr_block = "10.10.0.0/24"
+  availability_zone = "us-east-1a"
+
+  tags = {
+    Name = "tgw"
+  }
+}
+
 resource "aws_ec2_transit_gateway" "example" {
   amazon_side_asn = "64512"
   auto_accept_shared_attachments = "disable"
