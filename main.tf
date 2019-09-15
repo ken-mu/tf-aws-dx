@@ -7,6 +7,13 @@ provider "aws" {
   secret_key = var.aws_access_secret
 }
 
+provider "aws" {
+  alias      = "tf1"
+  region     = "us-east-1"
+  access_key = var.aws_access_key_tf1
+  secret_key = var.aws_access_secret_tf1
+}
+
 resource "aws_vpc" "main" {
   cidr_block       = "10.1.0.0/16"
 
