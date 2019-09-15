@@ -1,5 +1,7 @@
 variable "aws_access_key" {}
 variable "aws_access_secret" {}
+variable "aws_access_key_tf1" {}
+variable "aws_access_secret_tf1" {}
 
 provider "aws" {
   region     = "us-east-1"
