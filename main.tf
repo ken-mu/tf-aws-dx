@@ -112,3 +112,8 @@ resource "aws_ec2_transit_gateway_route_table_propagation" "main" {
   transit_gateway_attachment_id  = "${aws_ec2_transit_gateway_vpc_attachment.main.id}"
   transit_gateway_route_table_id = "${aws_ec2_transit_gateway_route_table.main.id}"
 }
+
+resource "aws_ram_resource_share" "tgw" {
+  name = "example"
+  allow_external_principals = false
+}
