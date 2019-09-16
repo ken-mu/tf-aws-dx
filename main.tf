@@ -79,7 +79,6 @@ resource "aws_ram_resource_association" "example" {
 }
 
 resource "aws_ram_principal_association" "example" {
-  provider = "aws.tf1"
   principal          = "${var.aws_tgw_account_id}"
   resource_share_arn = "${aws_ram_resource_share.example.arn}"
 }
