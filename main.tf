@@ -131,8 +131,3 @@ resource "aws_ram_principal_association" "example" {
   principal          = "${var.aws_tgw_account_id}"
   resource_share_arn = "${aws_ram_resource_share.example.arn}"
 }
-
-resource "aws_ram_resource_share_accepter" "example" {
-  share_arn = "${aws_ram_principal_association.example.resource_share_arn}"
-}
-
