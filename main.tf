@@ -115,7 +115,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "tf1" {
     Name = "tf1"
   }
   
-  depends_on = [aws_ec2_transit_gateway.example]
+  depends_on = [aws_ec2_transit_gateway_vpc_attachment.main]
 }
 
 resource "aws_ec2_transit_gateway_route_table" "main" {
