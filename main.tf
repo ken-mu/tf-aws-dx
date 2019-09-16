@@ -2,6 +2,7 @@ variable "aws_access_key" {}
 variable "aws_access_secret" {}
 variable "aws_access_key_tf1" {}
 variable "aws_access_secret_tf1" {}
+variable "aws_tgw_account_id" {}
 
 provider "aws" {
   region     = "us-east-1"
