@@ -68,6 +68,22 @@ resource "aws_ec2_transit_gateway" "example" {
   vpn_ecmp_support = "disable"
 }
 
+resource "aws_ram_resource_share" "example" {
+  name = "example"
+  allow_external_principals = false
+}
+
+resource "aws_ram_resource_association" "example" {
+  resource_arn       = "${aws_transit_gateway.example.arn}"
+  resource_share_arn = "${aws_ram_resource_share.example.arn}"
+}
+
+resource "aws_ram_principal_association" "example" {
+  provider = "aws.tf1"
+  principal          = "${var.aws_tgw_account_id}"
+  resource_share_arn = "${aws_ram_resource_share.example.arn}"
+}
+
 resource "aws_ec2_transit_gateway_vpc_attachment" "main" {
   transit_gateway_id = "${aws_ec2_transit_gateway.example.id}"
   vpc_id             = "${aws_vpc.main.id}"
@@ -85,6 +101,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "main" {
 }
 
 resource "aws_ec2_transit_gateway_vpc_attachment" "tf1" {
+  provider = "aws.tf1"
   transit_gateway_id = "${aws_ec2_transit_gateway.example.id}"
   vpc_id             = "${aws_vpc.tf1.id}"
 
@@ -114,20 +131,4 @@ resource "aws_ec2_transit_gateway_route_table_propagation" "main" {
   transit_gateway_route_table_id = "${aws_ec2_transit_gateway_route_table.main.id}"
 }
 
-resource "aws_ram_resource_share" "example" {
-  provider = "aws.tf1"
-  name = "example"
-  allow_external_principals = false
-}
 
-resource "aws_ram_resource_association" "example" {
-  provider = "aws.tf1"
-  resource_arn       = "${aws_subnet.tf1.arn}"
-  resource_share_arn = "${aws_ram_resource_share.example.arn}"
-}
-
-resource "aws_ram_principal_association" "example" {
-  provider = "aws.tf1"
-  principal          = "${var.aws_tgw_account_id}"
-  resource_share_arn = "${aws_ram_resource_share.example.arn}"
-}
