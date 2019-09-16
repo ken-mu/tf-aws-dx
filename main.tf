@@ -114,22 +114,24 @@ resource "aws_ec2_transit_gateway_route_table_propagation" "main" {
 }
 
 resource "aws_ram_resource_share" "example" {
+  provider = "aws.tf1"
   name = "example"
-  allow_external_principals = true
+  allow_external_principals = false
 }
 
 resource "aws_ram_resource_association" "example" {
-  resource_arn       = "${aws_ec2_transit_gateway.example.arn}"
+  provider = "aws.tf1"
+  resource_arn       = "${aws_subnet.tf1.arn}"
   resource_share_arn = "${aws_ram_resource_share.example.arn}"
 }
 
 resource "aws_ram_principal_association" "example" {
-  principal          = "578044811547"
+  provider = "aws.tf1"
+  principal          = "${var.aws_tgw_account_id}"
   resource_share_arn = "${aws_ram_resource_share.example.arn}"
 }
 
 resource "aws_ram_resource_share_accepter" "example" {
-  provider = "aws.tf1"
   share_arn = "${aws_ram_principal_association.example.resource_share_arn}"
 }
 
